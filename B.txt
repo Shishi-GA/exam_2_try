@@ -1,0 +1,46 @@
+#include <iostream>
+#include <cmath>
+#include <vector>
+#include <algorithm>
+using namespace std;
+
+bool isPrime(int n){
+    for (int i = 2; i < n; i++){
+        if (n % i == 0){
+            return false;
+        }
+    }
+    return true;
+    }
+int main(){
+    int a, b;
+    cin >> a >> b;
+    int i = 3;
+    vector<int> ans;
+    bool f = true;
+    while(f) {
+        if (isPrime(i)) {
+            int j = round(pow(i, 4));
+            if (j > b) {
+                f = false;
+            }
+            while (j <= b) {
+                if (j >= a) {
+                    ans.push_back(j);
+                }
+                j *= 2;
+            }
+        }
+        i += 2;
+    }
+    sort(ans.begin(), ans.end());
+    if (!ans.size()){
+      cout << "0";
+    } else {
+      for (int i = 0; i < ans.size(); ++i) {
+        cout << ans[i] << endl;
+      }
+    }
+    return 0;
+
+}

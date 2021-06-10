@@ -1,0 +1,56 @@
+#include <iostream>
+#include <fstream>
+using namespace std;
+
+int main(){
+  string s;
+  ifstream fin("input.txt");
+  fin >> s;
+
+    int maxl = 0, l = 0;
+    string max_posl = "", posl = "", poslfirst = "";
+    bool is_posl = false;
+    for (int i = 0; i < s.length() - 1; i++){
+        if (s[i] != s[i + 1]){
+            is_posl = true;
+            l++;
+            posl += s[i];
+        }
+
+        else if (is_posl == true){
+            if (l + 1 > maxl){
+                maxl = l + 1;
+                max_posl = posl + s[i];
+            }
+
+            l = 0;
+            is_posl = false;
+            posl = "";
+        }
+    }
+
+    if (is_posl == true && l + 1 > maxl){
+        maxl = l + 1;
+        max_posl = posl + s[s.length() - 1];
+    }
+
+    char start = s[0];
+    bool uhm = true;
+    for (int i = 1; i < s.length(); i++){
+        if (s[i] != uhm){
+            uhm = false;
+            break;
+        }
+    }
+
+
+    if (uhm == true)
+        cout << 0;
+    else
+       cout << max_posl << " " << maxl;
+
+
+    return 0;
+}
+
+
